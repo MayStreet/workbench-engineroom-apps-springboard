@@ -1,0 +1,59 @@
+# MayStreet Workbench EngineRoom Examples Springboard
+
+## Welcome
+
+Welcome to the EngineRoom Examples Springboard.
+
+This Springboard provides a couple of example applications which can be hosted using Workbench's EngineRoom containers.
+EngineRoom allows you to easily create and deploy long-running services which can be accessed by other users depending
+on the permissions you configure.
+
+## Simple HTTP Service Example
+
+This example provides a very simple HTTP API which can be used to return prices for a symbol.
+
+The code is available at _[web-api-example/__main__.py](web-api-example/__main__.py)_
+
+In order to run this example application, please follow these steps:
+
+### Create a Server to host Services
+1. Click on the "Resources" sidebar tab.
+2. In the "SERVERS" section, click the small plus icon to the right of the "SERVERS" caption.
+3. Provide an example name, and select the first option of each list.
+
+### Create a Service
+1. Click on the "Tabs" sidebar tab.
+2. In the "SERVICES" section, click the small plus icon to the right of the "SERVICES" caption.
+3. In the "Edit Service" view that opened, provide the following options:
+   - Name: anything you choose.
+   - Description: leave blank
+   - Type: Python Web Service
+   - Port: 8000
+   - Main file: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/\_\_main\_\_.py_.
+   - Requirements: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/resources.txt_.
+   - Server: select the server you created earlier.
+4. Click _Save_ and close the "Edit Service" view.
+
+### Deploy the Service
+1. The service should now be visible in the "SERVICES" section. Hover your mouse over the service name and click the "Play" button
+   that appears to start the server and deploy the service onto the server.
+2. Whilst the server is starting, create an API key you can use to invoke the service:
+   - Click the "View" menu and choose "Command Palette..."
+   - Enter or select "MST: New API Key".
+   - Select the default duration (or customise it).
+   - An API key will be created and opened in Workbench. Leave the editor panel open - you will need to copy the API key
+     when you run a test later.
+
+### Test the Service
+1. Once the service has provisioned and started, there will be a URL visible in the "SERVICE" section. Hover your mouse
+   over the URL and a small clipboard icon will appear on the right. Click it to copy the URL to the clipboard.
+2. On your local machine, open a Terminal or Console and enter the following command, substituting the tokens for the values:
+   - `curl --location --request GET '<<URL from clipboard>>/aapl-hourly-avg/2022/1/2'  --header 'Authorization: Bearer <<your API token>>`
+   - if you don't have `curl` then install it using your favourite package manager or Brew. You may also install Postman
+     and import the cURL command above in Postman by selecting _File_ -> _Import_, selecting "Raw text" and pasting in the cURL
+     command.
+3. Run the command. You will see output from the provided day in JSON.
+
+## Support
+
+For support, please email <support@maystreet.com>. Thank you.
