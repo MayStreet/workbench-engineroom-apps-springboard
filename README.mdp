@@ -12,7 +12,7 @@ on the permissions you configure.
 
 This example provides a very simple HTTP API which can be used to return prices for a symbol.
 
-The code is available at _[web-api-example/__main__.py](web-api-example/__main__.py)_
+The code is available at _[web-api-example/\_\_main\_\_.py](web-api-example/\_\_main\_\_.py)_
 
 In order to run this example application, please follow these steps:
 
@@ -22,13 +22,14 @@ In order to run this example application, please follow these steps:
 3. Provide an example name, and select the first option of each list.
 
 ### Create a Service
-1. Click on the "Tabs" sidebar tab.
+1. Click on the "Services" sidebar tab.
 2. In the "SERVICES" section, click the small plus icon to the right of the "SERVICES" caption.
 3. In the "Edit Service" view that opened, provide the following options:
    - Name: anything you choose.
    - Description: leave blank
    - Type: Python Web Service
    - Port: 8000
+   - Subdomain: (enter a random subdomain personal to you; this cannot be shared)
    - Main file: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/\_\_main\_\_.py_.
    - Requirements: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/resources.txt_.
    - Server: select the server you created earlier.
@@ -48,10 +49,10 @@ In order to run this example application, please follow these steps:
 1. Once the service has provisioned and started, there will be a URL visible in the "SERVICE" section. Hover your mouse
    over the URL and a small clipboard icon will appear on the right. Click it to copy the URL to the clipboard.
 2. On your local machine, open a Terminal or Console and enter the following command, substituting the tokens for the values:
-   - `curl --location --request GET '<<URL from clipboard>>/aapl-hourly-avg/2022/1/2'  --header 'Authorization: Bearer <<your API token>>`
-   - if you don't have `curl` then install it using your favourite package manager or Brew. You may also install Postman
+   - `curl --location --request GET '<<URL from clipboard>>/aapl-hourly-avg/2022/1/3'  --header 'Authorization: Bearer <<your API token>>'`
+   - __Note: if you don't have `curl` then install it using your favourite package manager or Brew. You may also install Postman
      and import the cURL command above in Postman by selecting _File_ -> _Import_, selecting "Raw text" and pasting in the cURL
-     command.
+     command.__
 3. Run the command. You will see output from the provided day in JSON.
 
 ## Support
