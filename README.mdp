@@ -12,7 +12,7 @@ on the permissions you configure.
 
 This example provides a very simple HTTP API which can be used to return prices for a symbol.
 
-The code is available at _[web-api-example/\_\_main\_\_.py](web-api-example/\_\_main\_\_.py)_
+The code is available at _[web-api-example/\_\_main\_\_.py](web-api-example/\_\_main\_\_.py)_.
 
 In order to run this example application, please follow these steps:
 
@@ -54,6 +54,53 @@ In order to run this example application, please follow these steps:
      and import the cURL command above in Postman by selecting _File_ -> _Import_, selecting "Raw text" and pasting in the cURL
      command.__
 3. Run the command. You will see output from the provided day in JSON.
+
+## Advanced Dashboard Example
+
+This example provides a full fledged example Dashboard built using our Streamlit integration.
+
+- The code is available at _[web-dashboard-example/dashboard.py](web-dashboard-example/dashboard.py)_.
+- The PWA manifest file is available at _[web-dashboard-example/dashboard_manifest.json](web-dashboard-example/dashboard_manifest.json)_
+
+_Please feel free to explore and customise these files as much as you would like to!_
+
+In order to run this example dashboard, please follow these steps:
+
+### Create a Server to host Services (you may ignore this step if you've already created one as per the earlier instructions):
+1. Click on the "Resources" sidebar tab.
+2. In the "SERVERS" section, click the small plus icon to the right of the "SERVERS" caption.
+3. Provide an example name, and select the first option of each list.
+
+### Create a Service
+1. Click on the "Services" sidebar tab.
+2. In the "SERVICES" section, click the small plus icon to the right of the "SERVICES" caption.
+3. In the "Edit Service" view that opened, provide the following options:
+   - Name: anything you choose.
+   - Description: leave blank
+   - Type: Streamlit Application
+   - Port: 8000
+   - Subdomain: (enter a random subdomain personal to you; this cannot be shared)
+   - Main file: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard.py_.
+   - Requirements: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard_resources.txt_.
+   - Streamlit Web App Manifest file location: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard_manifest.json_.
+   - Server: select the server you created earlier.
+4. Click _Save_ and close the "Edit Service" view.
+
+### Deploy the Service
+1. The service should now be visible in the "SERVICES" section. Hover your mouse over the service name and click the "Play" button
+   that appears to start the server and deploy the service onto the server.
+
+### Test the Service
+1. Once the service has provisioned and started, there will be a URL visible in the "SERVICE" section. Hover your mouse
+   over the URL and a small clipboard icon will appear on the right. Click it to copy the URL to the clipboard.
+2. Open a browser window, and enter that URL into the Address bar; you will be able to see the UI. Note you are also
+   able to install the application as a Portable Web Application (PWA). If you do so, you will able to install the
+   application as a native application inside your Operating System.
+3. You may also enter the same URL on a mobile phone and view it; you may also install the same application on your
+   mobile phone as a Portable Web Application.
+
+
+
 
 ## Support
 
