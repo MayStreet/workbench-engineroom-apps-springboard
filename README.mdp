@@ -8,6 +8,13 @@ This Springboard provides a couple of example applications which can be hosted u
 EngineRoom allows you to easily create and deploy long-running services which can be accessed by other users depending
 on the permissions you configure.
 
+## Reminder
+
+Remember you can drag panels around in the UI so you can see several items at the same time; this
+is helpful when you want to copy details from this README file into some of the Edit Service panels.
+
+![images/drag-panels.gif](/images/drag-panels.gif)
+
 ## Simple HTTP Service Example
 
 This example provides a very simple HTTP API which can be used to return prices for a symbol.
