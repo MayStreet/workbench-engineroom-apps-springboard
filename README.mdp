@@ -13,7 +13,7 @@ on the permissions you configure.
 Remember you can drag panels around in the UI so you can see several items at the same time; this
 is helpful when you want to copy details from this README file into some of the Edit Service panels.
 
-![images/drag-panels.gif](/images/drag-panels.gif)
+![images/drag-panels.gif](images/drag-panels.gif)
 
 ## Simple HTTP Service Example
 
@@ -29,13 +29,13 @@ In order to run this example application, please follow these steps:
 3. Provide an example name, and select the first option of each list.
 
 ### Create a Service
-1. Click on the "Services" sidebar tab.
+1. Click on the "Tasks" sidebar tab.
 2. In the "SERVICES" section, click the small plus icon to the right of the "SERVICES" caption.
 3. In the "Edit Service" view that opened, provide the following options:
    - Name: anything you choose.
    - Description: leave blank
    - Type: Python Web Service
-   - Port: 8000
+   - Port: 8000 (you might need to change the port if you already have a service with the same port in the same server)
    - Subdomain: (enter a random subdomain personal to you; this cannot be shared)
    - Main file: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/\_\_main\_\_.py_.
    - Requirements: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/resources.txt_.
@@ -79,16 +79,15 @@ In order to run this example dashboard, please follow these steps:
 3. Provide an example name, and select the first option of each list.
 
 ### Create a Service
-1. Click on the "Services" sidebar tab.
+1. Click on the "Tasks" sidebar tab.
 2. In the "SERVICES" section, click the small plus icon to the right of the "SERVICES" caption.
 3. In the "Edit Service" view that opened, provide the following options:
    - Name: anything you choose.
    - Description: leave blank
    - Type: Streamlit Application
-   - Port: 8000
+   - Port: 8000 (you might need to change the port if you already have a service with the same port in the same server)
    - Subdomain: (enter a random subdomain personal to you; this cannot be shared)
    - Main file: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard.py_.
-   - Requirements: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard_resources.txt_.
    - Streamlit Web App Manifest file location: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard_manifest.json_.
    - Server: select the server you created earlier.
 4. Click _Save_ and close the "Edit Service" view.

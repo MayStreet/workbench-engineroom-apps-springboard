@@ -64,6 +64,8 @@ def get_price_summary_by_minute(
     """
 
     prices = pd.DataFrame(list(md.query(md.DataSource.DATA_LAKE, query)))
+    if prices.empty:
+        return prices
 
     return prices.assign(dp_minute=pd.to_datetime(prices["dp_minute"], unit="ms"))
 
@@ -180,132 +182,135 @@ with st.spinner("Running Query..."):
             selected_product, selected_feeds, selected_date
         )
 
-        high, low, open, close = st.columns(4)
-        high.metric("High", prices["max_price"].max())
-        low.metric("Low", prices["min_price"].min())
-        open.metric("Open", prices["open_price"].iat[0])
-        close.metric("Close", prices["close_price"].iat[-1])
+        if prices.empty:
+            t1.text('No data available for the selected query.')
+        else: 
+            high, low, open, close = st.columns(4)
+            high.metric("High", prices["max_price"].max())
+            low.metric("Low", prices["min_price"].min())
+            open.metric("Open", prices["open_price"].iat[0])
+            close.metric("Close", prices["close_price"].iat[-1])
 
-        basic_candlestick = st.expander("Basic Candlestick Graph")
-        basic_candlestick.vega_lite_chart(
-            prices,
-            {
-                "encoding": {
-                    "x": {
-                        "field": "dp_minute",
-                        "type": "temporal",
-                        "title": "Time",
-                        "axis": {"format": "%H:%M", "labelAngle": -45, "title": "Time"},
-                    },
-                    "y": {
-                        "type": "quantitative",
-                        "scale": {"zero": False},
-                        "axis": {"title": "Price"},
-                    },
-                    "color": {
-                        "condition": {
-                            "test": "datum.open_price < datum.close_price",
-                            "value": "#06982d",
+            basic_candlestick = st.expander("Basic Candlestick Graph")
+            basic_candlestick.vega_lite_chart(
+                prices,
+                {
+                    "encoding": {
+                        "x": {
+                            "field": "dp_minute",
+                            "type": "temporal",
+                            "title": "Time",
+                            "axis": {"format": "%H:%M", "labelAngle": -45, "title": "Time"},
                         },
-                        "value": "#ae1325",
-                    },
-                },
-                "layer": [
-                    {
-                        "mark": "rule",
-                        "encoding": {
-                            "y": {"field": "min_price"},
-                            "y2": {"field": "max_price"},
+                        "y": {
+                            "type": "quantitative",
+                            "scale": {"zero": False},
+                            "axis": {"title": "Price"},
+                        },
+                        "color": {
+                            "condition": {
+                                "test": "datum.open_price < datum.close_price",
+                                "value": "#06982d",
+                            },
+                            "value": "#ae1325",
                         },
                     },
-                    {
-                        "mark": "bar",
-                        "encoding": {
-                            "y": {"field": "open_price"},
-                            "y2": {"field": "close_price"},
+                    "layer": [
+                        {
+                            "mark": "rule",
+                            "encoding": {
+                                "y": {"field": "min_price"},
+                                "y2": {"field": "max_price"},
+                            },
+                        },
+                        {
+                            "mark": "bar",
+                            "encoding": {
+                                "y": {"field": "open_price"},
+                                "y2": {"field": "close_price"},
+                            },
+                        },
+                    ],
+                    "height": 400,
+                },
+                use_container_width=True,
+            )
+
+            enhanced_candlestick = st.expander("Enhanced Candlestick Graph")
+
+            increasing = prices.close_price > prices.open_price
+            decreasing = prices.open_price > prices.close_price
+            bar_width = 60 * 1000
+
+            candlestick_figure = figure(
+                x_axis_type="datetime",
+                tools="pan,wheel_zoom,box_zoom,reset,save",
+                width=1000,
+                title="Candlestick",
+            )
+            candlestick_figure.grid.grid_line_alpha = 0.3
+
+            candlestick_figure.segment(
+                prices.dp_minute,
+                prices.max_price,
+                prices.dp_minute,
+                prices.min_price,
+                color="black",
+            )
+            candlestick_figure.vbar(
+                prices.dp_minute[increasing],
+                bar_width,
+                prices.open_price[increasing],
+                prices.close_price[increasing],
+                fill_color="#D5E1DD",
+                line_color="black",
+            )
+            candlestick_figure.vbar(
+                prices.dp_minute[decreasing],
+                bar_width,
+                prices.open_price[decreasing],
+                prices.close_price[decreasing],
+                fill_color="#F2583E",
+                line_color="black",
+            )
+
+            enhanced_candlestick.bokeh_chart(candlestick_figure, use_container_width=True)
+
+            feed_source = st.expander("Feed Source Graph")
+            feed_source.vega_lite_chart(
+                prices,
+                {
+                    "mark": "bar",
+                    "encoding": {
+                        "x": {
+                            "field": "f",
+                            "title": "Feed",
+                            "axis": {"labelAngle": -45, "title": "Feed"},
+                        },
+                        "y": {
+                            "type": "quantitative",
+                            "aggregate": "count",
+                            "scale": {"zero": False},
+                            "axis": {"title": "Rows per Feed"},
                         },
                     },
-                ],
-                "height": 400,
-            },
-            use_container_width=True,
-        )
-
-        enhanced_candlestick = st.expander("Enhanced Candlestick Graph")
-
-        increasing = prices.close_price > prices.open_price
-        decreasing = prices.open_price > prices.close_price
-        bar_width = 60 * 1000
-
-        candlestick_figure = figure(
-            x_axis_type="datetime",
-            tools="pan,wheel_zoom,box_zoom,reset,save",
-            width=1000,
-            title="Candlestick",
-        )
-        candlestick_figure.grid.grid_line_alpha = 0.3
-
-        candlestick_figure.segment(
-            prices.dp_minute,
-            prices.max_price,
-            prices.dp_minute,
-            prices.min_price,
-            color="black",
-        )
-        candlestick_figure.vbar(
-            prices.dp_minute[increasing],
-            bar_width,
-            prices.open_price[increasing],
-            prices.close_price[increasing],
-            fill_color="#D5E1DD",
-            line_color="black",
-        )
-        candlestick_figure.vbar(
-            prices.dp_minute[decreasing],
-            bar_width,
-            prices.open_price[decreasing],
-            prices.close_price[decreasing],
-            fill_color="#F2583E",
-            line_color="black",
-        )
-
-        enhanced_candlestick.bokeh_chart(candlestick_figure, use_container_width=True)
-
-        feed_source = st.expander("Feed Source Graph")
-        feed_source.vega_lite_chart(
-            prices,
-            {
-                "mark": "bar",
-                "encoding": {
-                    "x": {
-                        "field": "f",
-                        "title": "Feed",
-                        "axis": {"labelAngle": -45, "title": "Feed"},
-                    },
-                    "y": {
-                        "type": "quantitative",
-                        "aggregate": "count",
-                        "scale": {"zero": False},
-                        "axis": {"title": "Rows per Feed"},
-                    },
+                    "height": 400,
                 },
-                "height": 400,
-            },
-            use_container_width=True,
-        )
+                use_container_width=True,
+            )
 
-        prices_table = st.expander("Raw Data Table")
-        prices_table.dataframe(
-            prices.rename(
-                columns={
-                    "dp_minute": "Date/Time",
-                    "product": "Product",
-                    "f": "Feed",
-                    "min_price": "Min Price",
-                    "max_price": "Max Price",
-                    "close_price": "Close Price",
-                    "open_price": "Open Price",
-                },
-            ),
-            height=400,
-        )
+            prices_table = st.expander("Raw Data Table")
+            prices_table.dataframe(
+                prices.rename(
+                    columns={
+                        "dp_minute": "Date/Time",
+                        "product": "Product",
+                        "f": "Feed",
+                        "min_price": "Min Price",
+                        "max_price": "Max Price",
+                        "close_price": "Close Price",
+                        "open_price": "Open Price",
+                    },
+                ),
+                height=400,
+            )
