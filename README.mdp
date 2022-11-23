@@ -88,7 +88,6 @@ In order to run this example dashboard, please follow these steps:
    - Port: 8000 (you might need to change the port if you already have a service with the same port in the same server)
    - Subdomain: (enter a random subdomain personal to you; this cannot be shared)
    - Main file: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard.py_.
-   - Requirements: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard_requirements.txt_.
    - Streamlit Web App Manifest file location: click the "locate" icon to the right of the textbox and select _/home/workbench/web-dashboard-example/dashboard_manifest.json_.
    - Server: select the server you created earlier.
 4. Click _Save_ and close the "Edit Service" view.
