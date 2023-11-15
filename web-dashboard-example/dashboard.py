@@ -19,7 +19,7 @@ def get_price_summary_by_minute(
             SELECT
                 f,
                 product,
-                DATE_TRUNC('minute', TO_TIMESTAMP(exchangetimestamp / 1000000000)) AS dp_minute,
+                DATE_TRUNC('minute', FROM_UNIXTIME(exchangetimestamp / 1000000000)) AS dp_minute,
                 MIN(price) AS min_price,
                 MAX(price) AS max_price,
                 MIN(receipttimestamp) AS min_receipt,

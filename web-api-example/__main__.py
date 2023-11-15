@@ -14,7 +14,7 @@ def hourly_avg(year: int, month: int, day: int):
 
     query = f"""
     SELECT
-        DATE_TRUNC('hour', TO_TIMESTAMP(ExchangeTimestamp / 1000000000)) AS hour_ts,
+        DATE_TRUNC('hour', FROM_UNIXTIME(ExchangeTimestamp / 1000000000)) AS hour_ts,
         AVG(price) as avg_price
     FROM
         "prod_lake"."p_mst_data_lake".mt_trade
