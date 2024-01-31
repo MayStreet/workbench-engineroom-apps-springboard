@@ -105,7 +105,13 @@ In order to run this example dashboard, please follow these steps:
 3. You may also enter the same URL on a mobile phone and view it; you may also install the same application on your
    mobile phone as a Portable Web Application.
 
+## Streamlit New Features
+We have recently upgraded Streamlit 1.22.0 to 1.30.0. You can test the notable changes by deploying the Streamlit app available under the _[streamlit-new-features](streamlit-new-features)_ directory. 
 
+- The code is available at _[streamlit-new-features/streamlit-new-features.py](streamlit-new-features/streamlit-new-features.py)_.
+- The PWA manifest file is available at _[streamlit-new-features/streamlit-new-features-manifest.json](streamlit-new-features/streamlit-new-features-manifest.json)_
+
+You can follow the steps of the [Advanced Dashboard Example](#advanced-dashboard-example).
 
 
 ## Support
