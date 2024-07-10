@@ -37,8 +37,8 @@ In order to run this example application, please follow these steps:
    - Type: Python Web Service
    - Port: 8000 (you might need to change the port if you already have a service with the same port in the same server). This port must match the port that your service's code listens on. In our case the `port` argument passed to `uvicorn.run` is 8000.
    - Subdomain: (enter a random subdomain personal to you; this cannot be shared)
-   - Main file: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/\_\_main\_\_.py_.
-   - Requirements: click the "locate" icon to the right of the textbox and select _/home/workbench/web-api-example/resources.txt_.
+   - Main file: click the "locate" icon to the right of the textbox and select _<your-sprinboard-folder>/web-api-example/\_\_main\_\_.py_.
+   - Requirements: click the "locate" icon to the right of the textbox and select _<your-sprinboard-folder>/web-api-example/resources.txt_.
    - Server: select the server you created earlier.
 4. Click _Save_ and close the "Edit Service" view.
 
