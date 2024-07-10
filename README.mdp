@@ -29,7 +29,7 @@ In order to run this example application, please follow these steps:
 3. Provide an example name, and select the first option of each list.
 
 ### Create a Service
-1. Click on the "Tasks" sidebar tab.
+1. Click on the "Jobs" sidebar tab.
 2. In the "SERVICES" section, click the small plus icon to the right of the "SERVICES" caption.
 3. In the "Edit Service" view that opened, provide the following options:
    - Name: anything you choose.
@@ -80,7 +80,7 @@ In order to run this example dashboard, please follow these steps:
 3. Provide an example name, and select the first option of each list.
 
 ### Create a Service
-1. Click on the "Tasks" sidebar tab.
+1. Click on the "Jobs" sidebar tab.
 2. In the "SERVICES" section, click the small plus icon to the right of the "SERVICES" caption.
 3. In the "Edit Service" view that opened, provide the following options:
    - Name: anything you choose.
