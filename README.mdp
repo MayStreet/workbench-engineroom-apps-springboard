@@ -45,6 +45,7 @@ In order to run this example application, please follow these steps:
 ### Deploy the Service
 1. The service should now be visible in the "SERVICES" section. Hover your mouse over the service name and click the "Play" button
    that appears to start the server and deploy the service onto the server.
+   - When the service has started you will see its status as "RUNNING" next to the service name.
 2. Whilst the server is starting, create an API key you can use to invoke the service:
    - Click the "View" menu and choose "Command Palette..."
    - Enter or select "MST: New API Key".
